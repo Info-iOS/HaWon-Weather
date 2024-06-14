@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8822E19C2C19B7A4002E2CDF /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8822E1992C19B7A4002E2CDF /* BlackHanSans-Regular.ttf */; };
+		8822E19F2C19BC5F002E2CDF /* BlackHanSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8822E19E2C19BC5F002E2CDF /* BlackHanSans.ttf */; };
+		8822E1A12C19BCD1002E2CDF /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8822E1A02C19BCD1002E2CDF /* Arial Black.ttf */; };
+		884B6A1D2C18587D0019F7BE /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884B6A1C2C18587D0019F7BE /* DTO.swift */; };
 		885C3B1A2C0F2EEC001C6279 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C3B192C0F2EEC001C6279 /* AppDelegate.swift */; };
 		885C3B1C2C0F2EEC001C6279 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C3B1B2C0F2EEC001C6279 /* SceneDelegate.swift */; };
 		885C3B1E2C0F2EEC001C6279 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C3B1D2C0F2EEC001C6279 /* WeatherViewController.swift */; };
@@ -18,9 +22,16 @@
 		885C3B352C0F2FFE001C6279 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 885C3B342C0F2FFE001C6279 /* SnapKit-Dynamic */; };
 		885C3B382C0F3006001C6279 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 885C3B372C0F3006001C6279 /* Then */; };
 		885C3B3A2C0F301A001C6279 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C3B392C0F301A001C6279 /* Model.swift */; };
+		88743D1F2C16C8F900C34622 /* WeatherInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88743D1E2C16C8F900C34622 /* WeatherInfo.plist */; };
+		88743D232C16CC1600C34622 /* HideAPIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88743D222C16CC1600C34622 /* HideAPIKEY.swift */; };
+		88F0F7452C1AFD8B0066CEA7 /* TextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0F7442C1AFD8B0066CEA7 /* TextLable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8822E1992C19B7A4002E2CDF /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
+		8822E19E2C19BC5F002E2CDF /* BlackHanSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlackHanSans.ttf; sourceTree = "<group>"; };
+		8822E1A02C19BCD1002E2CDF /* Arial Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Black.ttf"; sourceTree = "<group>"; };
+		884B6A1C2C18587D0019F7BE /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
 		885C3B162C0F2EEC001C6279 /* HaWon-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HaWon-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		885C3B192C0F2EEC001C6279 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		885C3B1B2C0F2EEC001C6279 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +42,9 @@
 		885C3B2D2C0F2FCA001C6279 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		885C3B2F2C0F2FE3001C6279 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		885C3B392C0F301A001C6279 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		88743D1E2C16C8F900C34622 /* WeatherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WeatherInfo.plist; sourceTree = "<group>"; };
+		88743D222C16CC1600C34622 /* HideAPIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideAPIKEY.swift; sourceTree = "<group>"; };
+		88F0F7442C1AFD8B0066CEA7 /* TextLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +61,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8822E1982C19B742002E2CDF /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				8822E1A02C19BCD1002E2CDF /* Arial Black.ttf */,
+				8822E19E2C19BC5F002E2CDF /* BlackHanSans.ttf */,
+				8822E1992C19B7A4002E2CDF /* BlackHanSans-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		885C3B0D2C0F2EEC001C6279 = {
 			isa = PBXGroup;
 			children = (
@@ -66,15 +90,20 @@
 		885C3B182C0F2EEC001C6279 /* HaWon-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				8822E1982C19B742002E2CDF /* Font */,
 				885C3B192C0F2EEC001C6279 /* AppDelegate.swift */,
 				885C3B1B2C0F2EEC001C6279 /* SceneDelegate.swift */,
 				885C3B1D2C0F2EEC001C6279 /* WeatherViewController.swift */,
 				885C3B2F2C0F2FE3001C6279 /* WeatherCell.swift */,
 				885C3B2D2C0F2FCA001C6279 /* LineView.swift */,
+				88F0F7442C1AFD8B0066CEA7 /* TextLable.swift */,
 				885C3B392C0F301A001C6279 /* Model.swift */,
+				884B6A1C2C18587D0019F7BE /* DTO.swift */,
 				885C3B222C0F2EED001C6279 /* Assets.xcassets */,
 				885C3B242C0F2EED001C6279 /* LaunchScreen.storyboard */,
 				885C3B272C0F2EED001C6279 /* Info.plist */,
+				88743D1E2C16C8F900C34622 /* WeatherInfo.plist */,
+				88743D222C16CC1600C34622 /* HideAPIKEY.swift */,
 			);
 			path = "HaWon-Weather";
 			sourceTree = "<group>";
@@ -146,8 +175,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8822E19C2C19B7A4002E2CDF /* BlackHanSans-Regular.ttf in Resources */,
 				885C3B232C0F2EED001C6279 /* Assets.xcassets in Resources */,
 				885C3B262C0F2EED001C6279 /* Base in Resources */,
+				88743D1F2C16C8F900C34622 /* WeatherInfo.plist in Resources */,
+				8822E19F2C19BC5F002E2CDF /* BlackHanSans.ttf in Resources */,
+				8822E1A12C19BCD1002E2CDF /* Arial Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,9 +192,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				885C3B2E2C0F2FCA001C6279 /* LineView.swift in Sources */,
+				88F0F7452C1AFD8B0066CEA7 /* TextLable.swift in Sources */,
 				885C3B1E2C0F2EEC001C6279 /* WeatherViewController.swift in Sources */,
 				885C3B302C0F2FE3001C6279 /* WeatherCell.swift in Sources */,
+				884B6A1D2C18587D0019F7BE /* DTO.swift in Sources */,
 				885C3B3A2C0F301A001C6279 /* Model.swift in Sources */,
+				88743D232C16CC1600C34622 /* HideAPIKEY.swift in Sources */,
 				885C3B1A2C0F2EEC001C6279 /* AppDelegate.swift in Sources */,
 				885C3B1C2C0F2EEC001C6279 /* SceneDelegate.swift in Sources */,
 			);
