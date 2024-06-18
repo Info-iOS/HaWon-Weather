@@ -27,7 +27,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.identifier)
@@ -43,93 +44,120 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 6
     }
     
     func timeCheck() -> [Int] {
         
+        let today = model.list[0].dtTxt.components(separatedBy: " ")
+        
+        var todayIndex: Int = 0
+        for i in 0..<9 {
+            if model.list[i].dtTxt.components(separatedBy: " ")[0] == today[0] {
+                todayIndex += 1
+            } else {
+                break
+            }
+        }
+        print(todayIndex)
+        
         let time = Date()
-        let calendar = Calendar.current
+        _ = Calendar.current.dateComponents([.hour], from: time)
         
-        let dateComponent = Calendar.current.dateComponents([.hour], from: time)
+        let timeHour = Calendar.current.dateComponents([.hour], from: time)
         
-//        print(dateComponent.hour!)
+        let timeHour1: Int = timeHour.hour!
+        print(timeHour1)
         
-        var indexTime = 0
-        if let hour = dateComponent.hour {
-            for i in stride(from: 0, to: 22, by: 3) {
-                if hour == i {
-                    indexTime = i
-                    break
-                } else if hour < i {
-                    if hour <= (i*2 + 3) / 2 {
-                        indexTime = i - 3
-                    } else {
-                        indexTime = i
-                    }
+        var hourIndex = -1
+        for i in 0..<todayIndex {
+            let apiHour = Int(model.list[i].dtTxt.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
+            if apiHour <= timeHour1 {
+                hourIndex += 1
+            } else {
+                break
+            }
+        }
+        
+        var lastDay: Int = 39-todayIndex
+        if Int(model.list[39].dtTxt.components(separatedBy: " ")[1].components(separatedBy: ":")[0])! <= timeHour1 {
+            lastDay = 39
+        } else {
+            for i in stride(from: 39, to: 39-todayIndex, by: -1) {
+                let apiHour = Int(model.list[i].dtTxt.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
+                if apiHour <= timeHour1 {
+                    lastDay += 1
+                } else {
                     break
                 }
+                print(apiHour)
             }
-            if hour >= 22 {
-                indexTime = 21
-            }
-        } else {
-            indexTime = 0
         }
-
         
-//        print(indexTime)
+        print([hourIndex, hourIndex+8, hourIndex+16, hourIndex+24, hourIndex+32, lastDay])
         
-        switch indexTime {
-        case 0:
-            return [0, 8, 16, 24, 32, 40]
-        case 3:
-            return [1, 9, 17, 25, 33, 41]
-        case 6:
-            return [2, 10, 18, 26, 34, 42]
-        case 9:
-            return [3, 11, 19, 27, 35, 43]
-        case 12:
-            return [4, 12, 20, 28, 36, 44]
-        case 15:
-            return [5, 13, 21, 29, 37, 45]
-        case 18:
-            return [6, 14, 22, 30, 38, 46]
-        case 21:
-            return [7, 15, 23, 31, 39, 47]
-        default:
-            return [0, 8, 16, 24, 32, 40]
-        }
+        return [hourIndex, hourIndex+8, hourIndex+16, hourIndex+24, hourIndex+32, lastDay]
     }
-//    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: WeatherCell.identifier,
-            for: indexPath) as? WeatherCell
+        print("인덱스 제발제발 \(indexPath.row)")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.identifier, for: indexPath) as? WeatherCell
         
-        let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        switch indexPath.row {
+        case 0:
+            cell?.backgroundColor = .red
+        case 1:
+            cell?.backgroundColor = .blue
+        case 2:
+            cell?.backgroundColor = .yellow
+        default:
+            break
+        }
         
-//        let arrray = timeCheck()
+        cell?.setup(day: "day", temperature: 0.0, description: "", temperatureMax: 0.0, humidity: 0, temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
         
-//        print("array == \(arrray)")
-        
-//        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
-        
-//        if indexPath.item < model.list.count {
-//            let weatherItem = model.list[arrray[indexPath.row]]
+        return cell ?? UICollectionViewCell()
+    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        
+//        let cell = collectionView.dequeueReusableCell(
+//            withReuseIdentifier: WeatherCell.identifier,
+//            for: indexPath) as? WeatherCell
+//        
+//        let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+//        
+////        let arrray = timeCheck()
+//        
+////        print("array == \(arrray)")
+//        
+////        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
+//        
+//        print("인덱스 : \(indexPath.row)")
+//
+//        
+//        if !model.list.isEmpty {
+//            let array = timeCheck()
+//            let weatherItem = model.list[array[indexPath.row]]
 //            let description = weatherItem.weather.first?.description.rawValue ?? "No Description"
 //            let wind =  weatherItem.wind.speed
+//            
+////            print("인덱스 : \(indexPath.row) dt : \(weatherItem.dt)")
 //            
 //            cell?.setup(day: daysOfWeek[indexPath.item], temperature: Double(weatherItem.main.temp), description: description, temperatureMax: Double(weatherItem.main.tempMax), humidity: Int(weatherItem.main.humidity),temperatureMin: Double(weatherItem.main.tempMin), windSpeed: Double(wind), FeelsLike: Double(weatherItem.main.feelsLike), Pop: Double(weatherItem.pop))
 //        } else {
 //            cell?.setup(day: "No Data", temperature: 0.0, description: "No Description", temperatureMax: 0.0, humidity: 0,temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
-////        }
-        
-        return cell ?? UICollectionViewCell()
-    }
-    
+//        }
+//        
+//        return cell ?? UICollectionViewCell()
+//    }
+//    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.row) 번째 인덱스 cell 클릭 됨")
     }
     
     func makeGetCall() {

@@ -117,7 +117,7 @@ public class WeatherCell: UICollectionViewCell {
         
         line1.snp.makeConstraints {
             $0.top.equalToSuperview().offset(166)
-            $0.width.equalToSuperview().inset(20)
+            $0.width.equalToSuperview().inset(20.0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(3)
         }
@@ -229,7 +229,7 @@ public class WeatherCell: UICollectionViewCell {
     }
     
     func temperatureText(text: Double) {
-        let a = text - 273.15
+        let a = text 
         temperatureLabel.text = String(format: "%.1f°", a)
     }
     
