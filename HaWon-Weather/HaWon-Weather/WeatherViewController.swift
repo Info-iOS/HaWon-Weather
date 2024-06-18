@@ -53,18 +53,32 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         let dateComponent = Calendar.current.dateComponents([.hour], from: time)
         
+//        print(dateComponent.hour!)
+        
         var indexTime = 0
-        for i in stride(from: 0, to: 22, by: 3) {
-            if dateComponent.hour == i {
-                indexTime = i
-            } else if dateComponent.hour! < i {
-                if dateComponent.hour! <= (i*2+3)/2 {
-                    indexTime = i-3
-                } else {
+        if let hour = dateComponent.hour {
+            for i in stride(from: 0, to: 22, by: 3) {
+                if hour == i {
                     indexTime = i
+                    break
+                } else if hour < i {
+                    if hour <= (i*2 + 3) / 2 {
+                        indexTime = i - 3
+                    } else {
+                        indexTime = i
+                    }
+                    break
                 }
             }
+            if hour >= 22 {
+                indexTime = 21
+            }
+        } else {
+            indexTime = 0
         }
+
+        
+//        print(indexTime)
         
         switch indexTime {
         case 0:
@@ -87,7 +101,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
             return [0, 8, 16, 24, 32, 40]
         }
     }
-    
+//    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeatherCell.identifier,
@@ -95,11 +109,11 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         
-        let arrray = timeCheck()
+//        let arrray = timeCheck()
         
-        print("array == \(arrray)")
+//        print("array == \(arrray)")
         
-        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
+//        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
         
 //        if indexPath.item < model.list.count {
 //            let weatherItem = model.list[arrray[indexPath.row]]
@@ -108,8 +122,8 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
 //            
 //            cell?.setup(day: daysOfWeek[indexPath.item], temperature: Double(weatherItem.main.temp), description: description, temperatureMax: Double(weatherItem.main.tempMax), humidity: Int(weatherItem.main.humidity),temperatureMin: Double(weatherItem.main.tempMin), windSpeed: Double(wind), FeelsLike: Double(weatherItem.main.feelsLike), Pop: Double(weatherItem.pop))
 //        } else {
-            cell?.setup(day: "No Data", temperature: 0.0, description: "No Description", temperatureMax: 0.0, humidity: 0,temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
-//        }
+//            cell?.setup(day: "No Data", temperature: 0.0, description: "No Description", temperatureMax: 0.0, humidity: 0,temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
+////        }
         
         return cell ?? UICollectionViewCell()
     }

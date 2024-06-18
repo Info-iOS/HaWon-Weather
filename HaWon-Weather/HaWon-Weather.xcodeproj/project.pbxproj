@@ -24,6 +24,7 @@
 		885C3B3A2C0F301A001C6279 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C3B392C0F301A001C6279 /* Model.swift */; };
 		88743D1F2C16C8F900C34622 /* WeatherInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88743D1E2C16C8F900C34622 /* WeatherInfo.plist */; };
 		88743D232C16CC1600C34622 /* HideAPIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88743D222C16CC1600C34622 /* HideAPIKEY.swift */; };
+		88B953C92C2175ED006D2EE5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B953C82C2175ED006D2EE5 /* TestViewController.swift */; };
 		88F0F7452C1AFD8B0066CEA7 /* TextLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0F7442C1AFD8B0066CEA7 /* TextLable.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		885C3B392C0F301A001C6279 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		88743D1E2C16C8F900C34622 /* WeatherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WeatherInfo.plist; sourceTree = "<group>"; };
 		88743D222C16CC1600C34622 /* HideAPIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideAPIKEY.swift; sourceTree = "<group>"; };
+		88B953C82C2175ED006D2EE5 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		88F0F7442C1AFD8B0066CEA7 /* TextLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				885C3B272C0F2EED001C6279 /* Info.plist */,
 				88743D1E2C16C8F900C34622 /* WeatherInfo.plist */,
 				88743D222C16CC1600C34622 /* HideAPIKEY.swift */,
+				88B953C82C2175ED006D2EE5 /* TestViewController.swift */,
 			);
 			path = "HaWon-Weather";
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88B953C92C2175ED006D2EE5 /* TestViewController.swift in Sources */,
 				885C3B2E2C0F2FCA001C6279 /* LineView.swift in Sources */,
 				88F0F7452C1AFD8B0066CEA7 /* TextLable.swift in Sources */,
 				885C3B1E2C0F2EEC001C6279 /* WeatherViewController.swift in Sources */,
