@@ -43,7 +43,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         view.backgroundColor = UIColor(named: "weatherViewColor")
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    @objc func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
     
@@ -73,7 +73,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         for i in 0..<todayIndex {
             let apiHour = Int(model.list[i].dtTxt.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
             if apiHour <= timeHour1 {
-                hourIndex += 1
+                //                hourIndex += 1
             } else {
                 break
             }
@@ -99,59 +99,106 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
         return [hourIndex, hourIndex+8, hourIndex+16, hourIndex+24, hourIndex+32, lastDay]
     }
     
+    var currentIndex: Int = 0
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        print("Current Page Index: \(pageIndex)")
+        currentIndex = pageIndex+1
+        collectionView.reloadData()
+    }
+    
+    //    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    //        print("인덱스 제발제발 \(indexPath.row)")
+    //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.identifier, for: indexPath) as? WeatherCell
+    //
+    //        switch indexPath.row {
+    //        case 0:
+    //            cell?.backgroundColor = .red
+    //        case 1:
+    //            cell?.backgroundColor = .blue
+    //        case 2:
+    //            cell?.backgroundColor = .yellow
+    //        default:
+    //            break
+    //        }
+    //
+    //        cell?.setup(day: "day", temperature: 0.0, description: "", temperatureMax: 0.0, humidity: 0, temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
+    //
+    //        return cell ?? UICollectionViewCell()
+    //    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("인덱스 제발제발 \(indexPath.row)")
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.identifier, for: indexPath) as? WeatherCell
         
-        switch indexPath.row {
-        case 0:
-            cell?.backgroundColor = .red
-        case 1:
-            cell?.backgroundColor = .blue
-        case 2:
-            cell?.backgroundColor = .yellow
-        default:
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: WeatherCell.identifier,
+            for: indexPath) as? WeatherCell
+        
+        var daysOfWeek: [String] = []
+        
+        let time = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        
+        let currentWeekday = dateFormatter.string(from: time)
+        
+        print("요일 : \(currentWeekday)")
+        
+        
+        switch currentWeekday {
+        case "Monday":
+            daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             break
+        case "Tuesday":
+            daysOfWeek = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"]
+            break
+        case "Wednesday":
+            daysOfWeek = ["Wednesday", "Thursday", "Friday", "Saturday","Sunday", "Monday"]
+            break
+        case "Thursday":
+            daysOfWeek = ["Thursday", "Friday", "Saturday","Sunday", "Monday", "Tuesday"]
+            break
+        case "Friday":
+            daysOfWeek = ["Friday", "Saturday","Sunday", "Monday", "Tuesday", "Wednesday"]
+            break
+        case "Saturday":
+            daysOfWeek  = ["Saturday","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]
+            break
+        case "Sunday":
+            daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+            break
+        default:
+            daysOfWeek = ["No Date"]
         }
         
-        cell?.setup(day: "day", temperature: 0.0, description: "", temperatureMax: 0.0, humidity: 0, temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
+        print("인덱스 : \(currentIndex)")
+        
+//                let arrray = timeCheck()
+//        
+//                print("array == \(arrray)")
+//        
+        //        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
+        
+        
+        if !model.list.isEmpty {
+            let array = timeCheck()
+            
+            let weatherItem = model.list[array[currentIndex]]
+            let description = weatherItem.weather.first?.description.rawValue ?? "No Description"
+            let wind =  weatherItem.wind.speed
+            
+            print("인덱스 : \(indexPath.row) dt : \(weatherItem.dt)")
+            //            cell?.backgroundColor = .red
+            
+            cell?.setup(day: daysOfWeek[currentIndex], temperature: Double(weatherItem.main.temp), description: description, temperatureMax: Double(weatherItem.main.tempMax), humidity: Int(weatherItem.main.humidity),temperatureMin: Double(weatherItem.main.tempMin), windSpeed: Double(wind), FeelsLike: Double(weatherItem.main.feelsLike), Pop: Double(weatherItem.pop))
+        } else {
+            cell?.setup(day: "No Data", temperature: 0.0, description: "No Description", temperatureMax: 0.0, humidity: 0,temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
+        }
         
         return cell ?? UICollectionViewCell()
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//        let cell = collectionView.dequeueReusableCell(
-//            withReuseIdentifier: WeatherCell.identifier,
-//            for: indexPath) as? WeatherCell
-//        
-//        let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-//        
-////        let arrray = timeCheck()
-//        
-////        print("array == \(arrray)")
-//        
-////        print("index :: \(indexPath.row) arrayIndex :: \(arrray[indexPath.row])")
-//        
-//        print("인덱스 : \(indexPath.row)")
-//
-//        
-//        if !model.list.isEmpty {
-//            let array = timeCheck()
-//            let weatherItem = model.list[array[indexPath.row]]
-//            let description = weatherItem.weather.first?.description.rawValue ?? "No Description"
-//            let wind =  weatherItem.wind.speed
-//            
-////            print("인덱스 : \(indexPath.row) dt : \(weatherItem.dt)")
-//            
-//            cell?.setup(day: daysOfWeek[indexPath.item], temperature: Double(weatherItem.main.temp), description: description, temperatureMax: Double(weatherItem.main.tempMax), humidity: Int(weatherItem.main.humidity),temperatureMin: Double(weatherItem.main.tempMin), windSpeed: Double(wind), FeelsLike: Double(weatherItem.main.feelsLike), Pop: Double(weatherItem.pop))
-//        } else {
-//            cell?.setup(day: "No Data", temperature: 0.0, description: "No Description", temperatureMax: 0.0, humidity: 0,temperatureMin: 0.0, windSpeed: 0.0, FeelsLike: 0.0, Pop: 0.0)
-//        }
-//        
-//        return cell ?? UICollectionViewCell()
-//    }
-//    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
@@ -179,7 +226,7 @@ class WeatherViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     if let data = data {
                         do {
                             let decodedResponse = try JSONDecoder().decode(Weathers_DTO.self, from: data)
-                            print(decodedResponse)
+                                                                                    print(decodedResponse)
                             
                             DispatchQueue.main.async {
                                 self.model = decodedResponse

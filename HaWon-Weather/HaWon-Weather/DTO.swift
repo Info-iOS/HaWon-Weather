@@ -130,6 +130,7 @@ enum Description: String, Decodable {
     case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"
     case scatteredclouds = "scattered clouds"
+    case heavyIntensityRain = "heavy intensity rain"
 }
 
 enum MainEnum: String, Decodable {

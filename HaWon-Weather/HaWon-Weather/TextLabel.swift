@@ -1,6 +1,6 @@
 import UIKit
 
-class TextLable: UILabel {
+class TextLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()

@@ -35,37 +35,37 @@ public class WeatherCell: UICollectionViewCell {
         $0.image = UIImage(named: "temperature-high")
     }
     
-    let temperatureMaxLabel = TextLable()
+    let temperatureMaxLabel = TextLabel()
     
     let humidityImage = UIImageView().then {
         $0.image = UIImage(named: "rainy")
     }
     
-    let humidityLable = TextLable()
+    let humidityLable = TextLabel()
     
     let temperatureMinImage = UIImageView().then {
         $0.image = UIImage(named: "temperature-low")
     }
     
-    let temperatureMinLabel = TextLable()
+    let temperatureMinLabel = TextLabel()
     
     let windSpeedImage = UIImageView().then {
         $0.image = UIImage(named: "windy")
     }
     
-    let windSpeedLable = TextLable()
+    let windSpeedLable = TextLabel()
     
     let feelsLikeImage = UIImageView().then {
         $0.image = UIImage(named: "temperature-lines")
     }
     
-    let feelsLikeLable = TextLable()
+    let feelsLikeLable = TextLabel()
     
     let rainyPercentageImage = UIImageView().then {
         $0.image = UIImage(named: "humidity-percentage")
     }
     
-    let rainyPercentageLable = TextLable()
+    let rainyPercentageLable = TextLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -229,7 +229,7 @@ public class WeatherCell: UICollectionViewCell {
     }
     
     func temperatureText(text: Double) {
-        let a = text 
+        let a = text - 273.15
         temperatureLabel.text = String(format: "%.1f°", a)
     }
     
